@@ -3,8 +3,7 @@ sys.path.insert(0, "/home/apprenant/simplon_project/personal_diary/")
 
 from model.connexion import Connection
 
-from model.message import Message
-
+from model.client import Client
 
 class MessageModel():
     """Class to perform all queries related to the message table in the database"""
@@ -20,8 +19,6 @@ class MessageModel():
         self.db.cursor.execute(sql,)
         messages = self.db.cursor.fetchall()
         self.db.close_connection()
-        for key, value in enumerate(messages):
-            messages[key] = Message(value)
         return messages
 
     def display_one_message(self, name, last_name):
@@ -31,9 +28,7 @@ class MessageModel():
         self.db.cursor.execute(sql, (name,last_name))
         message = self.db.cursor.fetchone()
         self.db.close_connection()
-        if message:
-            return Message(message)
-        return False
+        return message
 
     def add_message(self, text, date, id_client):
         """ function for add a new message """
@@ -45,10 +40,10 @@ class MessageModel():
         self.db.close_connection()
 
 
-    def update_message(self, text, date):
+    def update_message(self, text, id_message):
         """function for updating a message"""
-        sql = "UPDATE message SET text = %s date = %s WHERE id_message = %s;"
-        percent_s =(text,date)
+        sql = "update message set text = %s where id_message = %s;"
+        percent_s = (text,id_message)
         self.db.initialize_connection()
         self.db.cursor.execute(sql,percent_s)
         self.db.connection.commit()

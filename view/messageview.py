@@ -44,7 +44,6 @@ class MessageView():
     def to_update_message(self):
         """function to update message """
         self.message.text = input('ecrivez votre text :')
-        self.message.date = input('ecrivez votre date : (aaaa/mm/jj)')
-        if self.message.date == '' : 
-            self.message.date = datetime.now()
-        self.message.update_message(self.message.text, self.message.date)
+        #self.client.id_client = int(input('ecrivez l\'id du client :'))
+        self.message.id_message = int(input('ecrivez l\' id du message que vous voulez modifier :'))
+        self.model.update_message(self.message.text, self.message.id_message)

@@ -7,8 +7,11 @@ from view.messageview import MessageView
 message = MessageView()
 client = ClientView()
 
-#client.new_client()
-#message.new_message()
+#client.new_client() 
+#message.new_message() 
 
+#client.to_show_clients() 
 #message.to_show_messages()
-client.to_show_clients()
+
+#client.to_update_client()
+#message.to_update_message()

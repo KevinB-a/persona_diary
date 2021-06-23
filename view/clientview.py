@@ -18,7 +18,7 @@ class ClientView():
     def to_show_clients(self):
         """display all clients """
         clients = self.model.show_clients()
-        print('voici tous les messages de vos clients')
+        print('voici tous vos clients')
         if clients:
             for client in clients:
                 print(client)
@@ -42,13 +42,11 @@ class ClientView():
         self.model.add_client(self.client.name, self.client.last_name, self.client.email, self.client.date_of_birth)
 
     def to_update_client(self):
-        """ """
+        """function for update information about the client """
         self.client.name = input('entrez le prénom du client : ')
         self.client.last_name = input('entrez le nom du client : ')
         self.client.email = input('Entrez l \'email du client : ')
         self.client.date_of_birth = input('entrez la date de naissance du client :')
         name = input('entrez le prénom du client (valeur originelle): ')
         last_name = input('entrez le nom du client (valeur originelle) : ')
-        if self.message.date == '' : 
-            self.message.date = datetime.now()
-        self.message.update_client(self.client.name, self.client.last_name, self.client.email, self.client.date_of_birth, name, last_name)
+        self.model.update_client(self.client.name, self.client.last_name, self.client.email, self.client.date_of_birth, name, last_name)
