@@ -1,7 +1,7 @@
 import sys
 sys.path.insert(0, "/home/apprenant/simplon_project/personal_diary/")
 
-from model.connexion import Connection
+from model.connection import Connection
 
 
 class ClientModel():
@@ -20,14 +20,16 @@ class ClientModel():
         self.db.close_connection()
         return clients
 
-    def display_one_client(self, name, last_name):
+    def display_one_client(self,id_client):
         """method to dislay one client  """
-        sql = "SELECT * FROM client WHERE name = %s AND last_name = %s;"
+        sql = "SELECT * FROM client WHERE id_client = %s;"
         self.db.initialize_connection()
-        self.db.cursor.execute(sql, (name, last_name))
+        self.db.cursor.execute(sql, (id_client,))
         client = self.db.cursor.fetchfetchone()
         self.db.close_connection()
         return client
+
+  
 
     def add_client(self,name, last_name, email, date_of_birth):
         """add a new client in the database """

@@ -7,7 +7,7 @@ from view.messageview import MessageView
 message = MessageView()
 client = ClientView()
 
-#client.new_client() 
+client.new_client() 
 #message.new_message() 
 
 #client.to_show_clients() 

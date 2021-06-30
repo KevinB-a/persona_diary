@@ -1,6 +1,9 @@
 import mysql.connector
+
 import sys
+
 sys.path.insert(0, "/home/apprenant/simplon_project/personal_diary/")
+
 from conf.id_mysql import username, password, database
 
 class Connection():
@@ -22,9 +25,11 @@ class Connection():
             self.connection = mysql.connector.connect(user = Connection.USER,
                                                password = Connection.PASSWORD,
                                                database = Connection.DATABASE)
+
             self.cursor = self.connection.cursor(buffered= True)
         except (Exception, mysql.connector.Error) as error :
             print ("Error while connecting to MySQL", error)    
+        return self.cursor, self.connection 
    
     def close_connection(self):
         """Close both connection and cursor"""

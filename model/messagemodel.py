@@ -1,7 +1,7 @@
 import sys
 sys.path.insert(0, "/home/apprenant/simplon_project/personal_diary/")
 
-from model.connexion import Connection
+from model.connection import Connection
 
 from model.client import Client
 
@@ -14,7 +14,7 @@ class MessageModel():
 
     def show_messages(self):
         """method to display all the message of the day """
-        sql = "SELECT * FROM message LEFT JOIN client ON message.id_client = client.id_client ;"
+        sql = "SELECT * FROM message INNER JOIN client ON message.id_client = client.id_client ;"
         self.db.initialize_connection()
         self.db.cursor.execute(sql,)
         messages = self.db.cursor.fetchall()

@@ -3,3 +3,4 @@ conf/*
 model/__pycache__/*
 view/__pycache__/*
 .vscode/*
+view/api/__pycache__/*
