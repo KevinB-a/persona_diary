@@ -5,15 +5,14 @@ from view.app.app1 import app1
 from view.app.app2 import app2 
 
 PAGES = {
-    "App1": app1,
-    "App2": app2
+    "Page1": app1,
+    "Page2": app2
         }
 st.sidebar.title('Navigation')
 selection = st.sidebar.radio("Go to", list(PAGES.keys()))
 page = PAGES[selection]
-#page.app()
 
-if selection == 'App1' : 
+if selection == 'Page1' : 
     app1()
 
 else : 

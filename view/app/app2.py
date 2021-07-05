@@ -23,6 +23,3 @@ def app2():
         id_client = st.text_input('ecrivez l\'id du client')
         id_message = st.text_input('ecrivez l\'id du message')
 
-
-
-    #list_of_message_values = [text, date, id_message, id_client]

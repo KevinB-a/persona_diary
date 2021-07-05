@@ -1,7 +1,6 @@
 #--------------------------------------------#
 #            user request                    #
 #--------------------------------------------#
-from mysql.connector import cursor
 
 
 def display_user(id_client):
