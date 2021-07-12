@@ -7,6 +7,8 @@ from fastapi import FastAPI
 
 from model.request import *
 
+from view.api.classes import *
+
 from model.connection import Connection
 
 db = Connection()
@@ -19,31 +21,31 @@ app = FastAPI()
 #--------------------------------------------#
 
 
-@app.get("/users/{user_id}")  # request for display one client
-def get_user(user_id):
+@app.get("/users/")  # request for display one client
+def get_user( entry_user : User):
     cursor = db.initialize_connection()
-    select_user, percent_s = display_user(user_id)
-    percent_s = int(user_id)
-    cursor.execute(select_user, (percent_s,))
+    query ="""select * from client where id_client = %s;"""
+    values = int(entry_user.user_id)
+    cursor.execute(query, (values,))
     user = cursor.fetchall()
     db.close_connection()
     return {'user_id': user}
 
 
-@app.put('/update_user/{user_id}') # good 
-def update_user(user_id):
+@app.put('/update_user/{user_id}') 
+def update_user(entry_user : User):
     cursor, connection = db.initialize_connection()
-    user_update, percent_s = update_user('name', 'last_name', 'email', '1985-03-07', user_id)
-    user_id = int(user_id)
-    cursor.execute(user_update, (percent_s[0],percent_s[1],percent_s[2],percent_s[3], user_id))
+    query = """update client set name = %s, last_name = %s, email = %s, date_of_birth = %s where id_client = %s;"""
+    values = (entry_user.name, entry_user.last_name, entry_user.email, entry_user.date_of_birth, entry_user.id_client)
+    cursor.execute(query, values )
     connection.commit()
     db.close_connection()
     return {'user_id' : 'mis a jour'}
 
 
-@app.post('/add_user/') # good
+@app.post('/add_user/') 
 def add_user():
-    cursor, connection = db.initialize_connection()
+    cursor, connection = db.initialize_connection() 
     user_add, percent_s = add_user('name', 'last_name', 'email', '1975-02-02')
     cursor.execute(user_add, (percent_s[0], percent_s[1], percent_s[2], percent_s[3]))
     connection.commit()
@@ -52,7 +54,7 @@ def add_user():
 
 
 
-@app.delete("/delete_user/{user_id}") #good
+@app.delete("/delete_user/{user_id}") 
 def delete_user(user_id) : 
     cursor, connection = db.initialize_connection()
     user_delete, percent_s = delete_user(user_id)
@@ -66,7 +68,7 @@ def delete_user(user_id) :
 #--------------------------------------------#
 
 
-@app.get("/messages/") # good
+@app.get("/messages/") 
 def get_messages():
     cursor, connection = db.initialize_connection()
     message = select_messages()
@@ -76,7 +78,7 @@ def get_messages():
     return {'messages' : messages1}
 
 
-@app.get("/message/{message_id}") # good
+@app.get("/message/{message_id}") 
 def get_message(message_id):
     cursor, connection = db.initialize_connection()
     message_id = int(message_id)
